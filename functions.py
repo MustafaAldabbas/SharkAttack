@@ -8,40 +8,23 @@ import seaborn as sns
 
 
 
-
-
 #Load Data
 def load_data(url):
-    original_df = pd.read_excel(url)
-    df = original_df.copy()
+    df = pd.read_excel(url)
     return df
-
-url = "https://www.sharkattackfile.net/spreadsheets/GSAF5.xls"
-df = load_data(url)
-
-
-
 
 
 
 #Get First Impression of Dataset
-def get_first_impression(df, n=3):
-    return df.head(n)
-
-print(get_first_impression(df))
-
-
+def get_first_impression(df=pd.DataFrame, n=3):
+    head_df = df.head(n)
+    return head_df
 
 
 
 #shape function 
 def get_shape(df):
     return df.shape
-
-print(get_shape(df))
-
-
-
 
 
 
@@ -50,11 +33,6 @@ def clean_column_names(df):
     df = df.rename(columns={"Species ": "Species"})
     return df
 
-df = clean_column_names(df)
-print(df.columns)
-
-
-
 
 
 # Cleaning Data
@@ -62,23 +40,12 @@ def select_columns(df, columns):
     df = df[columns]
     return df
 
-columns = ["Date", "Year", "Country", "Location", "Injury", "Species", "Activity"]
-df = select_columns(df, columns)
 
 
-
-
-
-
-#Drop Rows with All NaN Values
+#Drop rows with all NaN values
 def drop_all_nan_rows(df):
     df = df.dropna(how='all')
     return df
-
-df = drop_all_nan_rows(df)
-print(get_shape(df))
-
-
 
 
 
@@ -87,24 +54,12 @@ def drop_nan_year(df):
     df = df.dropna(subset=['Year'])
     return df
 
-df = drop_nan_year(df)
-print(get_first_impression(df))
-
-
-
 
 
 #correct Year Format
 def correct_year_format(df):
     df['Year'] = df['Year'].astype(int)
     return df
-
-df = correct_year_format(df)
-print(get_first_impression(df))
-
-
-
-
 
 
 
@@ -115,30 +70,7 @@ def filter_last_10_years(df):
 
 
 
-
-
-
-
-
-df = filter_last_10_years(df)
-
-#Incident Counts by Country
-def incident_counts_by_country(df, top_n=5):
-    return df['Country'].value_counts().head(top_n)
-
-print(incident_counts_by_country(df))
-
-
-
-
-
-
-
-
-
 #top countries with shark attacks piechart 
-import matplotlib.pyplot as plt
-
 def plot_top_countries_pie_chart(df):
     """
     Plots a pie chart of the top 4 countries with the most incidents and a fifth slice for the rest.
@@ -157,26 +89,20 @@ def plot_top_countries_pie_chart(df):
     top_4.plot.pie(autopct='%1.1f%%', startangle=90, title='Incidents per country', figsize=(10, 10), fontsize=15)
     plt.show()
 
-# Example usage:
-# Assuming `df` is already defined
-plot_top_countries_pie_chart(df)
+    #For future knowledge the autopct parameter is used to format the percentage of the pie chart.
+
+    """
+
+    The lambda function lambda p: '{:.0f}'.format(p * total / 100) calculates the count by applying the percentage to the total sum and formats it as an integer. 
+    This way, the pie chart will display the actual counts instead of percentages.
+
+    """
 
 
-
-
-
-
-
-`#Filter Incidents in USA
+#Filter Incidents in USA
 def filter_incidents_usa(df):
     df_usa = df[df['Country'] == 'USA'].copy()
     return df_usa
-
-df_usa = filter_incidents_usa(df)
-print(get_first_impression(df_usa))
-
-
-
 
 
 
@@ -210,16 +136,6 @@ def format_date_column(df, date_column='Date'):
     
     return df
 
-# Example usage:
-# Assuming `df_usa` is already defined
-df_usa = format_date_column(df_usa)
-print(df_usa.head(3))
-
-
-
-
-
-
 
 
 #Add Season Column
@@ -240,13 +156,6 @@ def add_season_column(df_usa):
     df_usa['Season'] = df_usa['Date'].apply(get_season)
     return df_usa
 
-df_usa = add_season_column(df_usa)
-print(get_first_impression(df_usa))
-
-
-
-
-
 
 #Group by Season and Year
 def group_by_season_year(df_usa):
@@ -255,27 +164,54 @@ def group_by_season_year(df_usa):
     grouped_season = grouped_season.drop('Unknown')
     return grouped_season
 
-grouped_season = group_by_season_year(df_usa)
-print(grouped_season)
-
-
-
-
 
 
 #Plot Incidents by Season
 def plot_incidents_by_season(grouped_season):
-    grouped_season[['Total sum']].plot(kind='bar', stacked=True, figsize=(10, 5))
+    # Plotting the stacked bar chart using just the Season and total columns, and show the number on top of each bar
+
+    #Color blue ocean shades
+
+    blues_hades = ['#1f77b4', '#66b3ff', '#3399ff', '#1a75ff']
+
+    # Create the bar plot
+
+    ax = grouped_season[['Total sum']].plot(kind='bar', stacked=True, figsize=(12, 8), color=blues_hades, edgecolor='black')
+
+    # Add values for each season on top of each bar
+
+    """
+    The for loop iterates over each bar in the plot.
+
+    f'{p.get_height()}': The height value is formatted as a string using an f-string.
+    p.get_x() + p.get_width() / 2.: The x-coordinate is calculated by adding the x-coordinate of the bar and half of its width.
+    p.get_height(): The y-coordinate is the height of the bar.
+    ha='center': The horizontal alignment is set to center.
+    va='center': The vertical alignment is set to center.
+    xytext=(0, 10): The text is placed 5 points above the bar.
+    textcoords='offset points': The text is offset by points.
+    fontsize=12: The font size is set to 12.
+
+    """
+
+    for p in ax.patches: #Patches in matplotlib are the objects that we can see in the plot, like bars, lines, etc.
+        ax.annotate(f'{int(p.get_height())}', 
+                (p.get_x() + p.get_width() / 2., p.get_height()),
+                ha='center', 
+                va='center', 
+                xytext=(0, 10), 
+                textcoords='offset points', 
+                fontsize=11, 
+                color='black')
+
+
+    # Set plot title and labels
     plt.title('Shark Attacks in the USA by Season')
     plt.ylabel('Number of Attacks')
     plt.xlabel('Season')
     plt.xticks(rotation=0)
     plt.legend(loc='upper right')
     plt.show()
-
-plot_incidents_by_season(grouped_season)
-
-
 
 
 
@@ -298,12 +234,6 @@ def standardize_species_names(df_usa):
     
     return df_usa
 
-df_usa = standardize_species_names(df_usa)
-
-
-
-
-
 
 
 #Plot Shark Attacks by Species
@@ -311,12 +241,6 @@ def plot_shark_attacks_by_species(df_usa):
     fig = sns.countplot(y="Species", data=df_usa, order=df_usa["Species"].value_counts().index)
     fig.set_title('Shark Attacks by Species')
     plt.show()
-
-plot_shark_attacks_by_species(df_usa)
-
-
-
-
 
 
 
@@ -327,14 +251,11 @@ def final_data_check(df_usa):
     print(df_usa['Species'].isnull().sum())
     print(df_usa['Species'].value_counts())
 
-final_data_check(df_usa)
-
-
-
-
 
 
 # Conclusion
+"""
 In this project, we performed data cleaning, exploration, and visualization to understand shark attack incidents.
 We identified the most common species involved, analyzed the data by year and location, and created visualizations
 to represent the findings.
+"""
