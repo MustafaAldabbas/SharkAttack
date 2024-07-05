@@ -28,10 +28,28 @@ The data is in an Excel file, therefore, we need to use one of functions in the 
 In order to use the data from the original DataFrame without changing anything, we need to use .copy() method. This method will create a copy of the original DataFrame. Thus, the data cleaning and manipulation that we will do for the analysis will not influence the original DataFrame. 
 
 
+
+## Data Analysis Process 
+
+1-Data Import
+2-Data Selection/Cleaning
+3-Data Standardization
+4-Data Filtering/Transformation
+
+
+
+
 ## Visualizations
 
+Geographic Hypothesis: The United States has a higher number of shark attacks compared to other countries.
+Pie Chart enabled the visualization of shares of different countries in the total number of incidents, displayed in percentages.
+
 ![Incidents per country](/charts/incidents_per_country.png?raw=true "Incidents per country")
+
+Bar/Count Plots allowed us to visualize the frequency of shark attacks over different variables
+#Seasonal Hypothesis
 ![Attacks per season](/charts/attacks_per_season.png?raw=true "Incidents per season")
+Species Hypothesis
 ![Attacks per species](/charts/attacks_per_species.png?raw=true "Incidents per species")
 
 
