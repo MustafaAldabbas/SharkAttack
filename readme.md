@@ -17,7 +17,7 @@ The original data was retrieved from the Global Shark Attack File, a repository 
 
 
 
-## Collect the Data
+## Data Selecting 
 
 First of all, we need to import the pandas and numpy library in order to use the functions and methods in Python. We also need to import matplotlib.pyplot library in order to create visualization in Python, such as plots and charts. 
 
