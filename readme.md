@@ -10,7 +10,9 @@
 The original data was retrieved from the Global Shark Attack File, a repository that provides current and historical data on shark/human interactions. Based on a short overview of the database and its variables, formulated the following hypothesis:
 
 1- **Geographic Hypothesis**: The United States has a higher number of shark attacks compared to other countries.
+
 2- **Seasonal Hypothesis** : In the United States, most shark attacks occur during the summer season.
+
 3- **Species Hypothesis**: In the United States, the White Shark is responsible for the most attacks and is considered the most dangerous type.
 
 
