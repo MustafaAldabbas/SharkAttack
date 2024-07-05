@@ -25,7 +25,6 @@ In order to use the data from the original DataFrame without changing anything, 
 ## Visualizations
 
 ![Incidents per country](/charts/incidents_per_country.png?raw=true "Incidents per country")
-![Australia vs USA](/charts/aus_vs_usa.png?raw=true "Incidents per country")
 ![Attacks per season](/charts/attacks_per_season.png?raw=true "Incidents per season")
 ![Attacks per species](/charts/attacks_per_species.png?raw=true "Incidents per species")
 
