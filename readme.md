@@ -44,15 +44,20 @@ In order to use the data from the original DataFrame without changing anything, 
 Geographic Hypothesis: The United States has a higher number of shark attacks compared to other countries.
 Pie Chart enabled the visualization of shares of different countries in the total number of incidents, displayed in percentages.
 
+**Incedents Per Country**
+ The United States has a higher number of shark attacks compared to other countries.
+
 ![Incidents per country](/charts/incidents_per_country.png?raw=true "Incidents per country")
 
 Bar/Count Plots allowed us to visualize the frequency of shark attacks over different variables
 
 **Seasonal Hypothesis**
+In the United States, most shark attacks occur during the summer season.
 
 ![Attacks per season](/charts/attacks_per_season.png?raw=true "Incidents per season")
 
 **Species Hypothesis**
+In the United States, the White Shark is responsible for the most attacks and is considered the most dangerous type.
 
 ![Attacks per species](/charts/attacks_per_species.png?raw=true "Incidents per species")
 
