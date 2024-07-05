@@ -48,10 +48,12 @@ Pie Chart enabled the visualization of shares of different countries in the tota
 
 Bar/Count Plots allowed us to visualize the frequency of shark attacks over different variables
 
-#Seasonal Hypothesis
+**Seasonal Hypothesis**
+
 ![Attacks per season](/charts/attacks_per_season.png?raw=true "Incidents per season")
 
-Species Hypothesis
+**Species Hypothesis**
+
 ![Attacks per species](/charts/attacks_per_species.png?raw=true "Incidents per species")
 
 
