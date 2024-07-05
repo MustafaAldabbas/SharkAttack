@@ -1,5 +1,9 @@
 # Shark Attack Project - Team 1
 
+### Presentation
+
+[Link to Google slideshow](https://docs.google.com/presentation/d/1eZ5r_cNE_Yd3IT_d6c1fR7CATcM_BcEJu_etBod41iE/edit#slide=id.g2e9c3044cba_0_27)
+
 -------
 
 ## Introduction
